@@ -72,10 +72,14 @@ flutter {
     source = "../.."
 }
 
-// 16 KB page-size fix: force ML Kit barcode-scanning 17.3.0 (16 KB aligned).
-// mobile_scanner 5.x otherwise resolves 17.2.0, whose native libs are 4 KB aligned.
+// 16 KB page-size fix: force the mobile_scanner 6.0.11 dependency set (16 KB aligned).
+// Barcode-only force is NOT enough: libimage_processing_util_jni.so needs CameraX 1.5.0.
 configurations.all {
     resolutionStrategy {
         force("com.google.mlkit:barcode-scanning:17.3.0")
+        force("com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1")
+        force("androidx.camera:camera-core:1.5.0")
+        force("androidx.camera:camera-lifecycle:1.5.0")
+        force("androidx.camera:camera-camera2:1.5.0")
     }
 }
