@@ -71,3 +71,11 @@ kotlin {
 flutter {
     source = "../.."
 }
+
+// 16 KB page-size fix: force ML Kit barcode-scanning 17.3.0 (16 KB aligned).
+// mobile_scanner 5.x otherwise resolves 17.2.0, whose native libs are 4 KB aligned.
+configurations.all {
+    resolutionStrategy {
+        force("com.google.mlkit:barcode-scanning:17.3.0")
+    }
+}

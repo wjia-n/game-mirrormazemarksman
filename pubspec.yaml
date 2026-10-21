@@ -1,8 +1,7 @@
 name: mirrormazemarksman
 description: "Mirror Maze Marksman - Reflect shots through mirror rooms"
 publish_to: 'none'
-version: 1.0.0+1
-
+version: 1.0.0+2
 environment:
   sdk: ^3.13.5
 
