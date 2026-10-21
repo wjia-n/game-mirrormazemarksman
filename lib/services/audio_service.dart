@@ -48,7 +48,7 @@ class MirrormazemarksmanAudio {
 
   Future<void> init() async {
     try {
-      await _music.setReleaseMode(ReleaseMode.loop);
+      await _music.setReleaseMode(ReleaseMode.loop).timeout(const Duration(seconds: 5));
     } catch (_) {}
   }
 
@@ -282,9 +282,13 @@ class MirrormazemarksmanAudio {
       return;
     }
     // Wait for any in-flight op, then bail if superseded meanwhile.
-    while (_musicBusy) {
+    var waited = 0;
+    while (_musicBusy && waited < 100) {
       await Future.delayed(const Duration(milliseconds: 30));
+      waited++;
     }
+    // Stale-lock guard: a hung player op must never block music ops forever.
+    if (_musicBusy) _musicBusy = false;
     if (gen != _musicGen || _disposed || !musicOn) return;
     _musicBusy = true;
     try {
@@ -307,9 +311,13 @@ class MirrormazemarksmanAudio {
   /// the user turns music OFF — never on screen navigation.
   Future<void> stopMusic() async {
     ++_musicGen; // cancel any in-flight start
-    while (_musicBusy) {
+    var waited = 0;
+    while (_musicBusy && waited < 100) {
       await Future.delayed(const Duration(milliseconds: 30));
+      waited++;
     }
+    // Stale-lock guard: a hung player op must never block music ops forever.
+    if (_musicBusy) _musicBusy = false;
     if (_disposed) return;
     try {
       await _music.stop();
