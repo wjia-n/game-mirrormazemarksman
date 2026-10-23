@@ -48,7 +48,7 @@ class _MenuScreenState extends State<MenuScreen> {
             Navigator.push(context, MaterialPageRoute(
                 builder: (_) => SettingsScreen(config: config, audio: widget.audio)));
           }),
-          _btn(context, '⭐  GO PRO', Colors.amber.shade700, () {
+          _btn(context, '❤️  SUPPORT', Colors.amber.shade700, () {
             widget.audio.click();
             Navigator.push(context, MaterialPageRoute(
                 builder: (_) => ProScreen(config: config, audio: widget.audio)));

@@ -15,7 +15,6 @@ class GameConfig {
   Color get darkColor => Color(dark);
   Color get accentColor => Color(accent);
   String get package => 'com.gameswajiha.$slug';
-  String get proId => '${slug}pro';
   String get coffeeId => '${slug}coffee';
   String get chocolateId => '${slug}chocolate';
 }

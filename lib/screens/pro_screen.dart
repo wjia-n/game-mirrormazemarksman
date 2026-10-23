@@ -35,19 +35,12 @@ class _ProScreenState extends State<ProScreen> {
   @override Widget build(BuildContext context) {
     final c = widget.config;
     return Scaffold(backgroundColor: c.darkColor,
-      appBar: AppBar(title: const Text('Go Pro'), backgroundColor: c.primaryColor, foregroundColor: Colors.white),
+      appBar: AppBar(title: const Text('Support'), backgroundColor: c.primaryColor, foregroundColor: Colors.white),
       body: ListView(padding: const EdgeInsets.all(20), children: [
-        const Text('⭐ FREE vs PRO', style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
+        const Text('Thanks for playing!', style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
         const SizedBox(height: 12),
-        _row('Full game', 'Full game + exclusive themes'),
-        _row('3 target speeds', 'All speeds + slow-mo mode'),
-        _row('Basic crosshair', '8 pro crosshairs'),
-        _row('Standard SFX', 'Premium sound pack'),
+        const Text('This game is fully unlocked. If you would like to support the developer, a tip is very much appreciated \u2014 it is simply a thank-you and unlocks nothing extra.', style: TextStyle(color: Colors.white70, fontSize: 15)),
         const SizedBox(height: 20),
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(backgroundColor: Colors.amber.shade700, padding: const EdgeInsets.symmetric(vertical: 16)),
-          onPressed: () { widget.audio.click(); _buy(c.proId); },
-          child: Text('UNLOCK PRO — ${c.proId}', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
         const SizedBox(height: 8),
         OutlinedButton(onPressed: () { widget.audio.click(); _buy(c.coffeeId); },
           child: Text('☕ Buy me a coffee (${c.coffeeId})', style: const TextStyle(color: Colors.white))),
@@ -62,10 +55,4 @@ class _ProScreenState extends State<ProScreen> {
       ]),
     );
   }
-  Widget _row(String free, String pro) => Padding(padding: const EdgeInsets.symmetric(vertical: 6),
-    child: Row(children: [
-      Expanded(child: Text(free, style: const TextStyle(color: Colors.white54))),
-      const Icon(Icons.arrow_forward, color: Colors.white38, size: 16),
-      Expanded(child: Text(pro, style: const TextStyle(color: Colors.amber, fontWeight: FontWeight.bold))),
-    ]));
 }
